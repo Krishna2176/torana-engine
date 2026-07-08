@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=69.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "torana"
+version = "0.1.0"
+description = "TORANA Engine - Modular Geospatial Computation Framework"
+readme = "README.md"
+requires-python = ">=3.11"
+
+authors = [
+    { name = "Krishna Khatale" }
+]
+
+license = { text = "MIT" }
+
+keywords = [
+    "GIS",
+    "Urban Design",
+    "Remote Sensing",
+    "Python",
+    "Geospatial"
+]
+
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "ruff",
+    "pytest",
+    "isort",
+    "mypy"
+]
+
+[project.scripts]
+torana = "torana.__main__:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = "black"
+
+[tool.ruff]
+line-length = 88

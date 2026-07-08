@@ -216,3 +216,67 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# ======================================================
+# TORANA Engine
+# ======================================================
+
+# Project data
+data/raw/
+data/processed/
+data/cache/
+data/exports/
+
+# Runtime outputs
+outputs/
+logs/
+
+# Local configuration
+configs/local.yaml
+
+# GIS temporary files
+*.aux.xml
+*.ovr
+*.qmd~
+*.qgz~
+*.gpkg-wal
+*.gpkg-shm
+
+# QGIS
+.qgis2/
+
+# VS Code workspace settings (optional)
+.vscode/settings.json
+.vscode/launch.json
+
+# OS files
+Thumbs.db
+.DS_Store
+# ======================================================
+# TORANA Engine
+# ======================================================
+
+# Project data
+data/raw/
+data/processed/
+data/cache/
+
+# Generated outputs
+outputs/
+
+# Runtime logs
+logs/
+
+# Local configuration
+configs/local.yaml
+
+# GIS temporary files
+*.aux.xml
+*.ovr
+*.qmd~
+*.qgz~
+*.gpkg-wal
+*.gpkg-shm
+
+# OS
+Thumbs.db
+.DS_Store
