@@ -280,3 +280,12 @@ configs/local.yaml
 # OS
 Thumbs.db
 .DS_Store
+# Python cache
+__pycache__/
+.pytest_cache/
+
+# Editable install metadata
+*.egg-info/
+
+# Virtual environment
+.venv/
