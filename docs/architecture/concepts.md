@@ -1,50 +1,16 @@
-# TORANA Engine - Core Concepts
+# TORANA Core Concepts
 
-## Overview
+**Version:** 0.1  
+**Status:** Active  
+**Last Updated:** July 2026
+
+---
+
+# Purpose
 
 This document defines the core concepts used throughout the TORANA Engine.
 
-These concepts establish a common vocabulary for the architecture, implementation, documentation, and future development of the platform.
-
-Every subsystem within TORANA should use these definitions consistently.
-
----
-
-# Design Philosophy
-
-TORANA is built around a small number of well-defined concepts.
-
-Each concept has a single responsibility and interacts with other concepts through clearly defined relationships.
-
-By separating responsibilities, the system remains modular, maintainable, and extensible.
-
----
-
-# Concept Hierarchy
-
-```text
-Engine
-│
-├── Job
-│   │
-│   ├── Workflow
-│   │   │
-│   │   ├── Task
-│   │   │   │
-│   │   │   └── Operation
-│   │   │
-│   │   └── Task
-│   │
-│   ├── Outputs
-│   ├── Logs
-│   └── Metadata
-│
-├── Plugin Registry
-├── Dataset Manager
-├── Cache Service
-├── Logging Service
-└── Configuration Service
-```
+Each concept has a single meaning within the framework. These definitions provide a common vocabulary for the architecture, implementation, documentation, and future plugins.
 
 ---
 
@@ -52,53 +18,19 @@ Engine
 
 ## Definition
 
-The Engine is the long-lived execution coordinator of TORANA.
+The Engine is the central orchestrator of TORANA.
 
-It provides the infrastructure required to execute geospatial analyses but contains no analysis-specific knowledge.
+It coordinates execution but does not perform geospatial analysis itself.
 
-The Engine remains active throughout the application's lifetime.
+The Engine is responsible for:
 
----
+- Managing Jobs
+- Loading Plugins
+- Scheduling Workflows
+- Tracking execution state
+- Coordinating Services
 
-## Purpose
-
-Coordinate execution.
-
-Manage shared services.
-
-Create Jobs.
-
-Load Plugins.
-
-Provide execution infrastructure.
-
----
-
-## Responsibilities
-
-* Create Jobs
-* Load Plugins
-* Manage execution services
-* Coordinate workflows
-* Schedule execution
-* Manage configuration
-* Provide logging infrastructure
-* Provide caching infrastructure
-
----
-
-## Does Not Own
-
-* Analysis algorithms
-* Spatial computations
-* Domain knowledge
-* Plugin implementations
-
----
-
-## Lifetime
-
-Application lifetime.
+The Engine never contains analysis-specific logic.
 
 ---
 
@@ -106,52 +38,17 @@ Application lifetime.
 
 ## Definition
 
-A Job represents one execution of the TORANA Engine.
+A Job is a single execution request submitted to the Engine.
 
-Every time a user starts an analysis, a new Job is created.
+A Job combines:
 
-The Job owns all execution-specific state.
+- one Plugin
+- one Workflow
+- configuration parameters
+- execution state
+- generated outputs
 
----
-
-## Purpose
-
-Represent a complete analysis execution.
-
----
-
-## Responsibilities
-
-* Store execution state
-* Store workflow instance
-* Track task progress
-* Store outputs
-* Store logs
-* Store execution metadata
-* Track execution status
-
----
-
-## Owns
-
-* Workflow
-* Task states
-* Outputs
-* Metadata
-* Execution logs
-* Temporary execution state
-
----
-
-## Created By
-
-Engine
-
----
-
-## Lifetime
-
-From analysis start until completion or archival.
+Every time a user requests an analysis, a new Job is created.
 
 ---
 
@@ -159,52 +56,44 @@ From analysis start until completion or archival.
 
 ## Definition
 
-A Plugin implements one domain-specific geospatial analysis.
-
-Each plugin defines the knowledge required to perform a specific analysis.
+A Plugin defines a geospatial analysis.
 
 Examples include:
 
-* Urban Heat Island
-* Flood Risk
-* Walkability
-* Solar Potential
-* Noise Analysis
-* Urban Morphology
+- Urban Heat Island
+- Flood Risk
+- Walkability
+- Solar Potential
+- Accessibility Analysis
+
+A Plugin describes:
+
+- required datasets
+- configuration schema
+- workflow
+- expected outputs
+- metadata
+
+Plugins declare *what* should be analysed.
+
+They do not control execution.
 
 ---
 
-## Purpose
+# Registry
 
-Describe how a specific analysis should be performed.
+## Definition
 
----
+The Registry stores every available Plugin.
 
-## Responsibilities
+Its responsibilities are limited to:
 
-* Declare required datasets
-* Define parameters
-* Define workflow
-* Implement algorithms
-* Define outputs
-* Define visualization requirements
+- registering plugins
+- discovering plugins
+- validating uniqueness
+- retrieving plugins
 
----
-
-## Does Not Own
-
-* Execution
-* Scheduling
-* Logging
-* Caching
-
-These responsibilities belong to the Engine.
-
----
-
-## Loaded By
-
-Plugin Manager
+The Registry never executes Plugins.
 
 ---
 
@@ -212,37 +101,19 @@ Plugin Manager
 
 ## Definition
 
-A Workflow is an executable plan generated from a Plugin.
+A Workflow defines the execution structure of a Job.
 
-It describes the sequence of Tasks required to complete an analysis.
+A Workflow is implemented as a Directed Acyclic Graph (DAG).
 
----
+It owns:
 
-## Purpose
+- Tasks
+- Dependency relationships
+- Validation rules
 
-Organize execution into a structured process.
+The Workflow determines which Tasks are ready for execution.
 
----
-
-## Responsibilities
-
-* Define execution order
-* Define dependencies
-* Organize Tasks
-* Describe expected outputs
-
----
-
-## Owns
-
-* Tasks
-* Dependency graph
-
----
-
-## Created By
-
-Plugin
+It never executes Tasks.
 
 ---
 
@@ -250,73 +121,45 @@ Plugin
 
 ## Definition
 
-A Task is the smallest meaningful unit of work executed by the Engine.
-
-Tasks should perform one clearly defined responsibility.
-
----
-
-## Examples
-
-* Download Sentinel imagery
-* Download OpenStreetMap data
-* Clip raster
-* Cloud masking
-* Calculate NDVI
-* Calculate LST
-* Generate heat map
-* Export GeoTIFF
-
----
-
-## Responsibilities
-
-* Perform one operation
-* Produce outputs
-* Report progress
-* Record execution status
-
----
-
-## Owns
-
-* Inputs
-* Outputs
-* Dependencies
-* Status
-* Execution metadata
-
----
-
-## Executed By
-
-Engine Scheduler
-
----
-
-# Operation
-
-## Definition
-
-An Operation is the lowest-level computational action performed within a Task.
-
-Operations are individual function calls or algorithmic steps.
+A Task is the smallest executable unit within TORANA.
 
 Examples include:
 
-* Read raster
-* Reproject layer
-* Compute statistics
-* Apply raster calculator
-* Write GeoTIFF
+- Download dataset
+- Clip raster
+- Compute NDVI
+- Generate contours
+- Export GeoPackage
 
-Multiple Operations may exist within a single Task.
+A Task contains:
+
+- identity
+- metadata
+- execution status
+
+Tasks are intentionally independent.
+
+Dependency management belongs to the Workflow.
+
+Execution belongs to the Engine.
 
 ---
 
-## Purpose
+# Service
 
-Perform atomic computational work.
+## Definition
+
+Services provide reusable infrastructure used throughout the Engine.
+
+Examples include:
+
+- Logging
+- Caching
+- Configuration
+- Dataset management
+- Exporting
+
+Services support execution but are not part of the analysis itself.
 
 ---
 
@@ -324,98 +167,17 @@ Perform atomic computational work.
 
 ## Definition
 
-A Dataset is any external or generated spatial resource used during analysis.
+A Dataset represents an input required for analysis.
 
-Datasets may be downloaded, generated, cached, or exported.
+Datasets may originate from:
 
----
+- Google Earth Engine
+- OpenStreetMap
+- PostGIS
+- Local files
+- Remote APIs
 
-## Examples
-
-* Satellite imagery
-* Building footprints
-* Road networks
-* Digital Elevation Models
-* Weather observations
-* Census data
-* Land use layers
-
----
-
-## Dataset Types
-
-* Raster
-* Vector
-* Point Cloud
-* Tabular
-* Time Series
-
----
-
-## Managed By
-
-Dataset Manager
-
----
-
-# Configuration
-
-## Definition
-
-Configuration defines how a Job should execute.
-
-Configuration contains user-selected parameters and execution settings.
-
----
-
-## Examples
-
-* Study area
-* Analysis type
-* Spatial resolution
-* Time period
-* Dataset source
-* Output format
-
----
-
-## Purpose
-
-Separate execution behavior from source code.
-
----
-
-## Managed By
-
-Configuration Manager
-
----
-
-# Execution Service
-
-## Definition
-
-Execution Services are long-lived infrastructure components provided by the Engine.
-
-They support Jobs but do not belong to any specific Job.
-
----
-
-## Examples
-
-* Plugin Manager
-* Dataset Manager
-* Scheduler
-* Cache Manager
-* Logging Service
-* Configuration Manager
-* Export Manager
-
----
-
-## Purpose
-
-Provide reusable infrastructure.
+Datasets are consumed by Tasks during execution.
 
 ---
 
@@ -423,133 +185,84 @@ Provide reusable infrastructure.
 
 ## Definition
 
-An Output is any result generated by a completed Job.
+Outputs are products generated by completed Jobs.
 
-Outputs may be intermediate or final.
+Examples include:
 
----
+- Raster datasets
+- Vector layers
+- Reports
+- Maps
+- 3D models
+- Statistics
 
-## Examples
-
-* GeoTIFF
-* GeoJSON
-* CSV
-* PNG
-* Interactive Map
-* PDF Report
-* Statistical Summary
+Outputs are consumed by visualization, reporting, or downstream analyses.
 
 ---
 
-## Generated By
-
-Plugins
-
----
-
-## Managed By
-
-Export Manager
-
----
-
-# Metadata
+# Analysis
 
 ## Definition
 
-Metadata describes a Job without containing its analytical results.
+An Analysis is the scientific or computational objective performed by a Plugin.
 
-Metadata enables reproducibility, auditing, and traceability.
+Examples include:
 
----
+- Urban Heat Island analysis
+- Flood susceptibility
+- Land suitability
+- Terrain analysis
+- Walkability assessment
 
-## Examples
-
-* Job ID
-* Plugin Version
-* Execution Time
-* Creation Date
-* User Configuration
-* Dataset Versions
-* Software Version
-* Execution Duration
-
----
-
-# Execution State
-
-Execution State represents the current progress of a Job or Task.
-
-Typical Job states include:
-
-* Created
-* Validating
-* Preparing
-* Running
-* Paused
-* Completed
-* Failed
-* Cancelled
-
-Task states follow a similar lifecycle but are managed independently.
+The Engine executes analyses through Plugins.
 
 ---
 
 # Relationships
 
 ```text
-Engine
-    │
-    ├── Creates ───────────────► Job
-    │                               │
-    │                               ├── Uses ─────────────► Plugin
-    │                               │
-    │                               ├── Owns ─────────────► Workflow
-    │                               │                           │
-    │                               │                           ├── Owns ─────► Tasks
-    │                               │                           │                   │
-    │                               │                           │                   └── Executes Operations
-    │                               │
-    │                               ├── Uses ─────────────► Configuration
-    │                               │
-    │                               ├── Produces ─────────► Outputs
-    │                               │
-    │                               └── Records ──────────► Metadata
-    │
-    └── Provides Execution Services
+User
+ │
+ ▼
+Job
+ │
+ ▼
+Plugin
+ │
+ ▼
+Workflow
+ │
+ ▼
+Tasks
+ │
+ ▼
+Services
+ │
+ ▼
+Outputs
 ```
 
 ---
 
-# Ownership Model
+# Guiding Principles
 
-Ownership within TORANA follows a strict hierarchy.
+Every concept follows the same architectural philosophy.
 
-* The Engine owns shared infrastructure.
-* Jobs own execution state.
-* Workflows own Tasks.
-* Tasks execute Operations.
-* Plugins define analytical knowledge.
-* Services provide reusable capabilities.
-
-This ownership model minimizes coupling and keeps responsibilities clearly separated.
+- One responsibility per component.
+- Loose coupling between components.
+- Execution separated from analysis.
+- Data separated from visualization.
+- Plugins extend functionality without modifying the Engine.
 
 ---
 
-# Summary
+# Notes
 
-TORANA is built around a small set of fundamental concepts:
+The concepts defined in this document are referenced throughout the TORANA architecture.
 
-* **Engine** orchestrates execution.
-* **Job** represents a single analysis execution.
-* **Plugin** provides domain-specific knowledge.
-* **Workflow** defines the execution plan.
-* **Task** performs meaningful units of work.
-* **Operation** performs atomic computations.
-* **Dataset** provides spatial information.
-* **Configuration** controls execution behavior.
-* **Execution Services** provide shared infrastructure.
-* **Outputs** store analysis results.
-* **Metadata** records execution information.
+Detailed implementation is described in:
 
-These concepts form the conceptual foundation of the TORANA Engine and should remain stable as the platform evolves.
+- engine.md
+- plugin.md
+- workflow.md
+- task_system.md
