@@ -1,200 +1,68 @@
-# Workflow Architecture
+# Workflow
 
-**Version:** 0.1  
-**Status:** Active  
-**Last Updated:** July 2026
-
----
-
-# Vision
-
-A Workflow defines **how an analysis is organized**, not **how it is executed**.
-
-It represents the execution structure of an analysis by organizing independent Tasks into a Directed Acyclic Graph (DAG).
-
-The Workflow enables the Engine to determine execution order without embedding scheduling logic inside Tasks or Plugins.
+**Version:** 0.2
 
 ---
 
 # Purpose
 
-A Workflow connects individual Tasks into a complete analysis pipeline.
+A Workflow describes the execution order of Tasks.
 
-Its primary responsibilities are to:
-
-- Organize Tasks
-- Define dependencies
-- Validate execution order
-- Identify Tasks that are ready for execution
-
-The Workflow itself never performs execution.
+It contains no execution logic.
 
 ---
 
 # Responsibilities
 
-A Workflow is responsible for:
+Workflow manages:
 
-- Managing Tasks
-- Managing dependency relationships
-- Maintaining a valid execution graph
-- Identifying executable Tasks
-- Providing execution structure to the Engine
+- Tasks
+- Dependencies
+- Execution graph
 
-A Workflow is **not** responsible for:
+It does not execute Tasks.
 
-- Executing Tasks
-- Scheduling Tasks
-- Managing Jobs
-- Running GIS algorithms
-- Producing Outputs
+---
+
+# Architecture
+
+```
+Workflow
+
+├── Task A
+
+├── Task B
+
+├── Task C
+
+└── Dependencies
+```
+
+Internally TORANA models a Workflow as a Directed Acyclic Graph (DAG).
+
+---
+
+# Relationship with Execution Context
+
+A Workflow becomes part of the Execution Context during execution.
+
+The Scheduler traverses the Workflow.
+
+The Task Executor executes Tasks.
 
 ---
 
 # Design Principles
 
-## Directed Acyclic Graph (DAG)
-
-TORANA represents every Workflow as a Directed Acyclic Graph.
-
-This ensures:
-
-- deterministic execution
-- dependency tracking
-- parallel execution (future)
-- cycle prevention
+- Directed Acyclic Graph
+- Independent Tasks
+- Scheduler controlled
+- Reusable execution plans
 
 ---
 
-## Separation of Responsibilities
+# Current Status
 
-Tasks represent work.
+Implemented.
 
-The Workflow represents relationships between Tasks.
-
-The Engine performs execution.
-
----
-
-## Declarative Structure
-
-A Workflow describes execution.
-
-It does not perform execution.
-
-This allows the Engine to apply different scheduling strategies without changing the Workflow itself.
-
----
-
-# Workflow Structure
-
-Conceptually a Workflow consists of:
-
-- Tasks
-- Dependency Graph
-- Validation Rules
-
-Example:
-
-```text
-Download DEM
-       │
-       ▼
-Clip DEM
-   ┌───┴────┐
-   ▼        ▼
-Slope    Aspect
-   └───┬────┘
-       ▼
- Export Results
-```
-
-Each node is a Task.
-
-Each edge represents a dependency.
-
----
-
-# Dependency Management
-
-Dependencies belong to the Workflow.
-
-Tasks remain completely independent.
-
-This allows:
-
-- Task reuse
-- Flexible scheduling
-- Easer testing
-- Cleaner architecture
-
----
-
-# Ready Tasks
-
-One of the Workflow's primary responsibilities is determining which Tasks are ready for execution.
-
-A Task is considered ready when all of its dependencies have completed successfully.
-
-The Engine uses this information to decide what to execute next.
-
----
-
-# Validation
-
-A Workflow should ensure:
-
-- Every Task has a unique identifier.
-- All dependencies reference valid Tasks.
-- No cyclic dependencies exist.
-- The execution graph is complete.
-
-Validation occurs before execution begins.
-
----
-
-# Relationships
-
-```text
-Plugin
-    │
-    ▼
-Workflow
-    │
-    ▼
-Tasks
-    │
-    ▼
-Engine
-```
-
-The Plugin defines the Workflow.
-
-The Workflow defines the execution structure.
-
-The Engine executes the Workflow.
-
----
-
-# Future Extensions
-
-Future versions of TORANA may extend the Workflow with:
-
-- Conditional branches
-- Parallel execution
-- Retry paths
-- Resource constraints
-- Distributed execution
-- Dynamic task generation
-
-These capabilities should extend the Workflow without changing its core responsibility.
-
----
-
-# Notes
-
-The Workflow is the execution blueprint of an analysis.
-
-It provides structure, not execution.
-
-By separating execution order from execution logic, TORANA remains modular, extensible, and capable of supporting increasingly complex geospatial analyses.
+Future Scheduler development will consume Workflows to determine executable Tasks.

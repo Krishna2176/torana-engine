@@ -1,66 +1,47 @@
 # Execution Context
 
-**Version:** 0.1  
-**Status:** Active  
-**Last Updated:** July 2026
-
----
-
-# Vision
-
-The Execution Context represents the runtime environment of a Job.
-
-It provides the Engine with a single object containing all runtime state, resources, and service references required during execution.
-
-The Execution Context exists only while a Job is executing.
+**Version:** 0.2
 
 ---
 
 # Purpose
 
-The Execution Context separates runtime concerns from the Job definition.
+The Execution Context represents the runtime environment of a Job.
 
-A Job represents **what** should be executed.
-
-The Execution Context represents **how** that execution is managed.
+Every Job receives exactly one Execution Context.
 
 ---
 
 # Responsibilities
 
-The Execution Context is responsible for:
+Execution Context stores:
 
-- Providing runtime state
-- Providing runtime resources
-- Providing shared service references
-- Acting as the communication layer between Engine, Scheduler and Tasks
+- Runtime state
+- Runtime resources
+- Shared service references
 
-It is not responsible for:
-
-- Executing Tasks
-- Scheduling Workflows
-- Performing GIS analysis
-- Producing visualizations
+It does not execute Tasks.
 
 ---
 
-# Architecture
+# Composition
 
 ```
-                ExecutionContext
-                        │
-        ┌───────────────┼───────────────┐
-        ▼               ▼               ▼
-ExecutionState   ExecutionResources   ExecutionServices
+ExecutionContext
+
+├── Job
+├── ExecutionState
+├── ExecutionResources
+└── ExecutionServices
 ```
 
 ---
 
-# Execution State
+# ExecutionState
 
-Tracks the current execution.
+Tracks execution progress.
 
-Examples include:
+Examples:
 
 - Current Task
 - Completed Tasks
@@ -69,68 +50,63 @@ Examples include:
 
 ---
 
-# Execution Resources
+# ExecutionResources
 
-Stores temporary runtime resources.
+Stores runtime data.
 
-Examples include:
+Examples:
 
-- Downloaded datasets
+- Datasets
 - Temporary files
 - Shared objects
-- Intermediate outputs
+- Outputs
 
 ---
 
-# Execution Services
+# ExecutionServices
 
-Provides references to shared infrastructure.
+Contains injected services.
 
-Examples include:
+Examples:
 
 - Logger
 - Cache
 - Dataset Manager
 - Exporter
 
-The Execution Context does not own these services.
-
-It only stores references supplied by the Engine.
-
 ---
 
 # Lifecycle
 
 ```
-Create
-    │
-    ▼
-Initialize
-    │
-    ▼
-Execution
-    │
-    ▼
-Cleanup
-    │
-    ▼
-Destroy
+Created
+
+↓
+
+Initialized
+
+↓
+
+Used by Engine
+
+↓
+
+Destroyed
 ```
 
 ---
 
 # Design Principles
 
-- Composition over inheritance
-- Separation of responsibilities
 - Runtime only
-- Engine managed
-- Independent of specific service implementations
+- One context per Job
+- Independent of Plugins
+- Service injection
 
 ---
 
-# Notes
+# Current Status
 
-A new Execution Context is created for every Job.
+Implemented.
 
-Once the Job completes, the Execution Context may be destroyed or archived depending on the execution strategy.
+Future versions will expand the Context with Scheduler state and runtime metadata.
