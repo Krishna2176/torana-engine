@@ -453,6 +453,29 @@ This milestone introduces:
 
 ---
 
+# Engine Core Lifecycle
+
+The Engine Core establishes the stable execution foundation of TORANA Engine.
+
+Engine Core v1.0 is considered architecturally complete and frozen.
+
+Future capabilities will be introduced through extension frameworks, including:
+
+- Plugin Framework
+- Dataset Framework
+- Analysis Framework
+- Visualization Framework
+
+The Engine Core should only receive:
+
+- Bug fixes
+- Documentation improvements
+- Additional tests
+- Non-breaking refactoring
+
+No new domain-specific functionality should be introduced into the Engine Core.
+
+
 # Summary
 
 The Engine Core establishes the execution framework of TORANA.

@@ -31,6 +31,13 @@ This document should be updated whenever a long-term engineering decision is mad
 - TaskExecutor executes individual Tasks.
 - Workflow owns task dependency graphs.
 - Runtime state is isolated from configuration.
+- Engine Core v1.0 is frozen.
+- Future capabilities should be implemented through extension frameworks rather than expanding the Engine Core.
+- Changes to Engine Core are limited to:
+  - Bug fixes
+  - Documentation improvements
+  - Additional tests
+  - Non-breaking refactoring
 
 ---
 

@@ -4,7 +4,9 @@
 
 Plugin Framework v1.0
 
----
+Status
+
+🟡 In Progress
 
 # Current Workflow Stage
 
