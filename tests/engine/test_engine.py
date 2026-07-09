@@ -11,6 +11,7 @@ from tests.fixtures.sample_job import create_sample_job
 
 from torana.engine.engine import Engine
 from torana.engine.execution_context import ExecutionContext
+from torana.engine.execution_manager import ExecutionManager
 from torana.engine.registry import PluginRegistry
 from torana.engine.status import JobStatus
 
@@ -23,7 +24,10 @@ def test_submit_job() -> None:
     registry = PluginRegistry()
     registry.register(DummyPlugin())
 
-    engine = Engine(registry)
+    engine = Engine(
+        registry=registry,
+        execution_manager=ExecutionManager(),
+    )
 
     job = create_sample_job()
 
@@ -34,3 +38,18 @@ def test_submit_job() -> None:
     assert context.job is job
 
     assert job.runtime.status == JobStatus.READY
+
+
+def test_engine_has_execution_manager() -> None:
+    """
+    The Engine should expose its ExecutionManager.
+    """
+
+    registry = PluginRegistry()
+
+    engine = Engine(registry)
+
+    assert isinstance(
+        engine.execution_manager,
+        ExecutionManager,
+    )
