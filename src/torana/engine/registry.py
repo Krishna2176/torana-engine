@@ -75,7 +75,7 @@ class PluginRegistry:
 
         return plugin_id in self._plugins
 
-    def list_plugins(self) -> list[str]:
+    def plugin_ids(self) -> list[str]:
         """
         Return all registered plugin IDs.
         """
