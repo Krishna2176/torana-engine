@@ -1,244 +1,185 @@
 # TORANA Engine Architecture
 
-**Version:** 0.1  
-**Status:** Active  
+**Version:** 0.2
+
+**Status:** Active
+
 **Last Updated:** July 2026
 
 ---
 
 # Vision
 
-TORANA (Terrain-Oriented Research, Analysis & Network Automation) is a modular geospatial computation framework designed to automate spatial analysis, simulation, visualization, and reporting.
+TORANA Engine is a modular geospatial computation framework designed to automate spatial analysis through reusable analysis plugins.
 
-The long-term goal of TORANA is to allow a user to describe **what** they want to analyse rather than **how** to perform the analysis.
+The framework separates domain models, runtime execution, orchestration, infrastructure services, and visualization into independent modules.
 
-Instead of manually downloading datasets, writing GIS scripts, processing rasters, exporting maps, and creating reports, the Engine orchestrates the entire workflow through reusable plugins and standardized execution pipelines.
+The primary objective is to provide a scalable architecture capable of supporting GIS workflows, remote sensing analyses, urban simulations, and future distributed execution.
 
 ---
 
-# Purpose
+# High-Level Architecture
 
-TORANA separates responsibilities into independent components.
+```
+                    User
+                     │
+                     ▼
+                    Job
+                     │
+                     ▼
+                  Engine
+                     │
+                     ▼
+            Execution Context
+                     │
+      ┌──────────────┼──────────────┐
+      ▼              ▼              ▼
+ ExecutionState ExecutionResources ExecutionServices
+                     │
+                     ▼
+                 Workflow
+                     │
+                     ▼
+                    Tasks
+```
 
-This separation allows each subsystem to evolve without affecting the others.
+---
 
-The architecture is built around the following principles:
+# Layers
 
-- Modular
-- Extensible
-- Plugin-driven
-- Testable
-- Maintainable
-- Independent of any specific GIS software
+TORANA is organized into five architectural layers.
+
+## Domain Layer
+
+Defines the business objects.
+
+Includes:
+
+- Plugin
+- Task
+- Workflow
+- Job
+
+These classes describe *what* the Engine executes.
+
+---
+
+## Runtime Layer
+
+Represents execution state.
+
+Includes:
+
+- ExecutionContext
+- ExecutionState
+- ExecutionResources
+- ExecutionServices
+
+These classes exist only while a Job is executing.
+
+---
+
+## Orchestration Layer
+
+Coordinates execution.
+
+Includes:
+
+- Engine
+- PluginRegistry
+
+Future additions:
+
+- Scheduler
+- TaskExecutor
+
+---
+
+## Infrastructure Layer
+
+Provides shared services.
+
+Examples:
+
+- Dataset Manager
+- Logger
+- Cache
+- Exporter
+- Configuration
+
+---
+
+## Extension Layer
+
+Contains user-developed Plugins.
+
+Every analysis is implemented as a Plugin rather than inside the Engine.
 
 ---
 
 # Core Principles
 
-## 1. Analysis is independent of visualization
-
-Spatial analysis produces results.
-
-Visualization consumes results.
-
-Neither component depends on the implementation of the other.
-
----
-
-## 2. Plugins define analysis
-
-The Engine never contains analysis logic.
-
-Instead, analyses are implemented as Plugins.
-
-Examples include:
-
-- Urban Heat Island
-- Flood Risk
-- Walkability
-- Solar Potential
-- Accessibility
-- Land Suitability
+- Composition over inheritance
+- Separation of responsibilities
+- Plugin-based architecture
+- Workflow-driven execution
+- Immutable specifications
+- Runtime isolation
+- Service injection
 
 ---
 
-## 3. Engine orchestrates execution
+# Execution Flow
 
-The Engine coordinates execution.
-
-It does not implement GIS algorithms.
-
-Its responsibilities include:
-
-- Loading plugins
-- Creating jobs
-- Managing workflows
-- Scheduling tasks
-- Reporting execution status
-
----
-
-## 4. Workflows define execution order
-
-A Workflow is a Directed Acyclic Graph (DAG) describing task dependencies.
-
-The Engine executes the Workflow.
-
-The Workflow itself never executes tasks.
-
----
-
-## 5. Tasks are independent
-
-A Task represents one unit of work.
-
-Tasks contain state and metadata only.
-
-Dependency management belongs to the Workflow.
-
-Execution belongs to the Engine.
-
----
-
-# System Architecture
-
-```text
-                 User
-                   │
-                   ▼
-            Analysis Request
-                   │
-                   ▼
-               Engine
-                   │
-        ┌──────────┴──────────┐
-        ▼                     ▼
- Plugin Registry         Job Manager
-        │                     │
-        ▼                     ▼
-     Plugins            Workflow (DAG)
-                               │
-                               ▼
-                             Tasks
-                               │
-                               ▼
-                      Analysis Services
-                               │
-                               ▼
-                         Generated Outputs
+```
+User
+    │
+    ▼
+Create Job
+    │
+    ▼
+Engine.submit()
+    │
+    ▼
+Validate Plugin
+    │
+    ▼
+Create ExecutionContext
+    │
+    ▼
+Workflow Execution
+    │
+    ▼
+Results
 ```
 
 ---
 
-# Project Structure
+# Current Status
 
-```text
-torana-engine/
+## Implemented
 
-├── src/
-│   └── torana/
-│       ├── core/
-│       ├── engine/
-│       ├── plugins/
-│       ├── services/
-│       ├── analysis/
-│       ├── datasets/
-│       ├── visualization/
-│       └── utils/
-│
-├── docs/
-├── tests/
-├── data/
-├── outputs/
-├── configs/
-└── scripts/
-```
+- Plugin
+- Plugin Registry
+- Task
+- Workflow
+- Job
+- Execution Context
+- Engine
 
----
+## Planned
 
-# Component Responsibilities
-
-| Component | Responsibility |
-|-----------|----------------|
-| Engine | Orchestrates execution |
-| Plugin | Defines an analysis |
-| Registry | Stores available plugins |
-| Workflow | Defines task dependencies |
-| Task | Represents one executable unit of work |
-| Services | Shared infrastructure (logging, caching, exporting, scheduling) |
-
----
-
-# Execution Pipeline
-
-A typical execution follows these stages:
-
-1. User submits an analysis request.
-2. Engine selects the requested Plugin.
-3. Plugin defines the required Workflow.
-4. Workflow identifies executable Tasks.
-5. Engine schedules Tasks.
-6. Analysis Services perform computations.
-7. Outputs are generated.
-8. Visualization consumes the outputs.
-
----
-
-# Development Principles
-
-TORANA follows several engineering principles.
-
-- Architecture before implementation.
-- One feature at a time.
-- Every feature has tests.
-- Documentation evolves with implementation.
-- Components have a single responsibility.
-- Public APIs should remain stable.
-- Design for extensibility rather than quick solutions.
-
----
-
-# Current Implementation Status
-
-| Component | Status |
-|-----------|--------|
-| Plugin | ✅ Implemented |
-| Registry | ✅ Implemented |
-| Task | ✅ Implemented |
-| Workflow | ✅ Implemented |
-| Job | 🚧 Planned |
-| Engine | 🚧 Planned |
-| Scheduler | 🚧 Planned |
-| Executor | 🚧 Planned |
-| Dataset Manager | 🚧 Planned |
-
----
-
-# Future Roadmap
-
-The next major milestones are:
-
-1. Job
-2. Engine
-3. Scheduler
-4. Task Executor
-5. Dataset Manager
-6. Plugin Loader
-7. Built-in Analysis Plugins
-8. Visualization Pipeline
-9. Reporting System
+- Scheduler
+- Task Executor
+- Dataset Manager
+- Plugin Loader
+- Service Injection
+- Distributed Execution
 
 ---
 
 # Notes
 
-This document describes the high-level architecture of TORANA.
+TORANA intentionally separates execution orchestration from analysis implementation.
 
-Detailed behavior of individual components is documented separately:
-
-- `concepts.md`
-- `engine.md`
-- `plugin.md`
-- `workflow.md`
-- `task_system.md`
-- `plugin_spec.md`
+The Engine coordinates execution but never performs GIS analysis itself.
