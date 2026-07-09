@@ -1,11 +1,50 @@
 # Changelog
 
-## v0.1 – Foundation
+All significant architectural milestones are documented here.
 
-- Established project architecture.
-- Implemented Plugin base class.
-- Added Plugin Registry.
-- Implemented Task model.
-- Implemented DAG-based Workflow.
-- Introduced testing with pytest.
-- Added Architecture Decision Records.
+---
+
+# Engine Core v1.0
+
+## Added
+
+### Core Models
+
+- Plugin
+- Task
+- Workflow
+- Job
+
+### Runtime
+
+- ExecutionContext
+- ExecutionState
+- ExecutionResources
+- ExecutionServices
+
+### Execution
+
+- Engine
+- PluginRegistry
+- Scheduler
+- ExecutionManager
+- TaskExecutor
+
+### Architecture
+
+- Dependency Injection
+- Workflow DAG
+- Stateless Scheduler
+- Engine Composition
+
+### Testing
+
+- Comprehensive pytest suite
+- Shared fixtures
+- Dependency injection testing
+
+### Documentation
+
+- Architecture documentation
+- ADRs
+- Specifications

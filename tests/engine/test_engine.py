@@ -14,6 +14,8 @@ from torana.engine.execution_context import ExecutionContext
 from torana.engine.execution_manager import ExecutionManager
 from torana.engine.registry import PluginRegistry
 from torana.engine.status import JobStatus
+from torana.engine.scheduler import Scheduler
+from torana.engine.task_executor import TaskExecutor
 
 
 def test_submit_job() -> None:
@@ -26,7 +28,10 @@ def test_submit_job() -> None:
 
     engine = Engine(
         registry=registry,
-        execution_manager=ExecutionManager(),
+        execution_manager=ExecutionManager(
+    scheduler=Scheduler(),
+    task_executor=TaskExecutor(),
+),
     )
 
     job = create_sample_job()

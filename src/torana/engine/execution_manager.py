@@ -8,44 +8,60 @@ from __future__ import annotations
 
 from torana.engine.execution_context import ExecutionContext
 from torana.engine.scheduler import Scheduler
+from torana.engine.task_executor import TaskExecutor
 
 
 class ExecutionManager:
     """
-    Coordinates execution of a Workflow.
+    Coordinates Workflow execution.
 
     The ExecutionManager owns the execution
-    lifecycle while delegating scheduling to
-    the Scheduler.
+    lifecycle while delegating scheduling and
+    task execution to dedicated components.
     """
 
     def __init__(
         self,
         scheduler: Scheduler | None = None,
+        task_executor: TaskExecutor | None = None,
     ) -> None:
 
         self._scheduler = scheduler or Scheduler()
+        self._task_executor = task_executor or TaskExecutor()
+
+    # --------------------------------------------------
 
     @property
     def scheduler(self) -> Scheduler:
         """
-        Scheduler used for execution.
+        Scheduler used during execution.
         """
 
         return self._scheduler
+
+    # --------------------------------------------------
+
+    @property
+    def task_executor(self) -> TaskExecutor:
+        """
+        TaskExecutor used during execution.
+        """
+
+        return self._task_executor
+
+    # --------------------------------------------------
 
     def execute(
         self,
         context: ExecutionContext,
     ) -> ExecutionContext:
         """
-        Execute a Job.
+        Execute the supplied ExecutionContext.
 
-        Scheduler v1 only determines whether
-        work remains.
+        Scheduler determines which Tasks are
+        executable.
 
-        Task execution will be added in the
-        next milestone.
+        TaskExecutor performs Task execution.
         """
 
         workflow = context.job.runtime.workflow
@@ -55,14 +71,12 @@ class ExecutionManager:
 
         while self._scheduler.has_pending_tasks(workflow):
 
-            ready = self._scheduler.get_ready_tasks(workflow)
+            ready_tasks = self._scheduler.get_ready_tasks(workflow)
 
-            if not ready:
+            if not ready_tasks:
                 break
 
-            #
-            # TaskExecutor will be inserted here.
-            #
-            break
+            for task in ready_tasks:
+                self._task_executor.execute(task)
 
         return context
