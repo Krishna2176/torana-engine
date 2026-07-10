@@ -1,199 +1,93 @@
-# Milestones
-
-Major engineering milestones for the development of TORANA Engine.
-
-Each milestone represents a stable subsystem that is designed, documented, tested, implemented, and integrated before development proceeds to the next stage.
+# TORANA Milestones
 
 ---
 
-# ❄️ Engine Core v1.0
+## Engine Core v1.0
 
-**Status**
+Status: ✅ Completed
 
-Completed
-
-**Objective**
-
-Establish the execution foundation of TORANA Engine.
-
-**Deliverables**
-
-### Core Models
-
-- Plugin
-- Task
-- Workflow
-- Job
-
-### Runtime
-
-- ExecutionContext
-- ExecutionResources
-- ExecutionServices
-- ExecutionState
-
-### Execution
+Deliverables
 
 - Engine
+- Execution Pipeline
+- Workflow
 - Scheduler
-- TaskExecutor
-- ExecutionManager
-- PluginRegistry
+- Task Executor
+- Runtime Models
+- Unit Tests
 
-### Engineering
-
-- Testing Infrastructure
-- Architecture Documentation
-- Specifications
+Frozen.
 
 ---
 
-# 🟡 Plugin Framework v1.0
+## Plugin Framework v1.0
 
-**Status**
+Status: ✅ Completed
 
-In Progress
+Deliverables
 
-**Objective**
-
-Build the extensibility framework that enables domain-specific functionality to be added without modifying the Engine Core.
-
-**Deliverables**
-
-### Framework
-
-- Plugin Architecture
-- Plugin Contract
-- Plugin Lifecycle
-- Plugin Metadata
+- Plugin Manifest
+- Base Plugin
 - Plugin Registry
-- Plugin Development Guide
-- Plugin SDK
+- Plugin Exceptions
+- Plugin Types
+- Reference Plugin
+- Integration Tests
 
-### Engineering
-
-- Plugin Test Infrastructure
-- Reference Documentation
-- ADR-001 – Plugin Framework
-
-### Reference Implementation
-
-- Flood Risk Analysis Plugin
+Frozen.
 
 ---
 
-# ⚪ Dataset Framework v1.0
+## Dataset Framework v1.0
 
-**Status**
+Status: 🚧 Current
 
-Planned
+Planned Deliverables
 
-**Objective**
-
-Provide a unified framework for acquiring, validating, and managing spatial datasets.
-
-**Deliverables**
-
-- Dataset Manager
-- Dataset Providers
-- Local Dataset Support
-- Remote Dataset Support
-- Google Earth Engine Integration
-- Dataset Metadata
+- Dataset Manifest
+- Dataset Registry
+- Dataset Provider Interface
+- Dataset Discovery
 - Dataset Validation
+- Dataset Provider SDK
+- Reference Dataset Provider
 
 ---
 
-# ⚪ Analysis Framework v1.0
+## Analysis Framework v1.0
 
-**Status**
+Status: Planned
 
-Planned
+Planned Deliverables
 
-**Objective**
-
-Provide reusable spatial analysis algorithms that can be shared across Analysis Plugins.
-
-**Deliverables**
-
-- Raster Processing
-- Vector Processing
-- Hydrology Algorithms
-- Terrain Analysis
-- Network Analysis
-- GIS Utilities
+- Analysis Pipeline
+- Algorithm Interfaces
+- Analysis Services
+- Shared Analysis Components
 
 ---
 
-# ⚪ Visualization Framework v1.0
+## Visualization Framework v1.0
 
-**Status**
+Status: Planned
 
-Planned
+Planned Deliverables
 
-**Objective**
-
-Provide reusable visualization components independent of analysis logic.
-
-**Deliverables**
-
-- Interactive Maps
-- Three.js Visualization
-- Blender Integration
+- Visualization Plugins
 - Report Generation
-- Export Pipelines
+- Map Generation
+- Three.js Integration
+- Blender Integration
 
 ---
 
-# ⚪ Desktop Framework v1.0
+## Engine v2.0
 
-**Status**
+Status: Future
 
-Planned
+Potential enhancements
 
-**Objective**
-
-Provide a desktop interface for managing projects and executing analyses.
-
-**Deliverables**
-
-- Project Management
-- Analysis Execution
-- Visualization Interface
-- Dataset Management
-- Plugin Management
-
----
-
-# ⚪ Cloud Framework v1.0
-
-**Status**
-
-Planned
-
-**Objective**
-
-Enable scalable remote execution of TORANA Engine.
-
-**Deliverables**
-
-- Remote Execution
-- Distributed Processing
-- Job Queue
-- REST API
-- Authentication
-- Cloud Storage Integration
-
----
-
-# 🚀 TORANA Engine v1.0
-
-**Status**
-
-Future
-
-**Objective**
-
-Deliver the first stable production release of TORANA Engine.
-
-This milestone represents the completion and integration of all major framework components into a unified geospatial computation platform.
+- Parallel Execution
+- Distributed Execution
+- Resource Scheduling
+- Execution Monitoring

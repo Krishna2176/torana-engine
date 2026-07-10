@@ -1,91 +1,82 @@
 # Current Phase
 
-## Current Milestone
+**Project:** TORANA Engine
 
-Plugin Framework v1.0
+**Current Milestone:** Dataset Framework v1.0
 
-Status
-
-🟡 In Progress
-
-# Current Workflow Stage
-
-Architecture
-
-The Plugin Framework architecture is currently being designed and documented before implementation begins.
+**Status:** In Progress
 
 ---
 
-# Current Objective
+# Completed Milestones
 
-Design a reusable Plugin Framework that serves as the extensibility layer of the TORANA Engine.
+## Engine Core v1.0
 
-The framework will define the architecture, contracts, lifecycle, metadata, and registry required for all plugins.
+Status: ✅ Complete
 
-The Flood Risk Plugin will serve as the reference implementation and establish the architectural standard for every future Analysis Plugin.
+The Engine Core establishes the stable execution foundation of TORANA.
 
----
+Implemented components include:
 
-# Current Deliverable
+- Core Domain Models
+- Runtime Models
+- Engine
+- Execution Manager
+- Scheduler
+- Task Executor
+- Workflow
+- Plugin Registry Integration
+- Comprehensive Unit Tests
 
-Plugin Framework Architecture Documentation
-
-Current document:
-
-- `docs/plugin-framework/plugin_architecture.md`
-
----
-
-# Immediate Tasks
-
-## Documentation
-
-1. Plugin Architecture
-2. Plugin Contract
-3. Plugin Lifecycle
-4. Plugin Metadata
-5. Plugin Registry
-6. Plugin Development Guide
-7. ADR-001 – Plugin Framework
-
-## Engineering
-
-8. Test Design
-9. Plugin Framework Implementation
-10. Flood Risk Reference Plugin
+The Engine Core is architecturally frozen.
 
 ---
 
-# Current Status
+## Plugin Framework v1.0
 
-🟡 In Progress
+Status: ✅ Complete
 
-- Engine Core v1.0 has been completed and frozen.
-- Plugin Framework v1.0 architecture has begun.
-- No implementation has started.
+The Plugin Framework establishes the extension mechanism for TORANA.
+
+Implemented components include:
+
+- Plugin Manifest
+- Base Plugin
+- Plugin Registry
+- Plugin Exceptions
+- Plugin Types
+- Reference Flood Risk Plugin
+- Unit Tests
+- Integration Tests
+
+The Plugin Framework is architecturally frozen.
 
 ---
 
-# Blockers
+# Current Work
 
-None.
+Dataset Framework v1.0
+
+Objectives:
+
+- Dataset Manifest
+- Dataset Registry
+- Dataset Provider Interface
+- Dataset Discovery
+- Dataset Validation
+- Reference Dataset Provider
 
 ---
 
-# Next Milestone Review
+# Engineering Rule
 
-Plugin Framework v1.0
+Completed milestones are frozen.
 
-Review will occur after:
+Only the following changes are permitted:
 
-- Architecture
-- Documentation
-- Test Design
-- Implementation
-- Refactoring
-- Documentation Synchronization
-- Validation
-- Version Control
-- Project Status Update
+- Bug fixes
+- Documentation improvements
+- Additional tests
+- Non-breaking refactoring
 
-have been completed in accordance with the TORANA Definition of Done.
+New functionality must be implemented within the current milestone.

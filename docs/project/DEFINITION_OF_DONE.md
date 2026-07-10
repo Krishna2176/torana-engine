@@ -1,133 +1,56 @@
 # Definition of Done
 
-A milestone, subsystem, or feature is considered complete only when every item in this checklist has been completed.
-
-This document defines the minimum engineering standard for all development within TORANA Engine.
+A TORANA milestone is considered complete only when all of the following conditions are satisfied.
 
 ---
 
-# 1. Architecture
+## Architecture
 
-The component has been architecturally designed.
-
-Completed items include:
-
-- Responsibilities defined
-- Interfaces identified
-- Interactions documented
 - Architecture reviewed
+- Responsibilities defined
+- Interfaces frozen
+- ADRs completed
 
 ---
 
-# 2. Documentation
+## Documentation
 
-Architecture and supporting documentation have been written.
-
-This may include:
-
-- Architecture documents
-- Specifications
-- Guides
-- ADRs
+- Specifications complete
+- Architecture documentation complete
+- Developer documentation complete
 
 ---
 
-# 3. Test Design
+## Implementation
 
-Tests have been designed before implementation.
-
-This includes:
-
-- Unit test cases
-- Expected behavior
-- Failure scenarios
-- Edge cases
+- Feature complete
+- Public API finalized
+- Code reviewed
+- Type hints complete
 
 ---
 
-# 4. Implementation
+## Testing
 
-The feature has been implemented according to the approved architecture and specifications.
-
----
-
-# 5. Refactoring
-
-Implementation has been reviewed and improved.
-
-Goals include:
-
-- Improved readability
-- Reduced duplication
-- Better maintainability
-- Consistency with project architecture
+- Unit tests implemented
+- Integration tests implemented
+- Full test suite passes
 
 ---
 
-# 6. Documentation Synchronization
+## Project
 
-Documentation has been updated to match the implementation.
-
-Update documentation where required, including:
-
-- Architecture
-- Specifications
-- Guides
-- CHANGELOG
+- Documentation synchronized
+- Milestone committed
+- Git tag created
+- Milestone frozen
 
 ---
 
-# 7. Validation
+## Current Status
 
-The implementation has been validated.
-
-Minimum requirement:
-
-```bash
-python -m pytest
-```
-
-Future validation may also include:
-
-- Type checking
-- Linting
-- Performance benchmarks
-
----
-
-# 8. Version Control
-
-Commit the completed work.
-
-Typical workflow:
-
-```bash
-git add .
-
-git commit -m "Meaningful commit message"
-
-git push
-```
-
-Tag milestone releases when appropriate.
-
----
-
-# 9. Project Documentation Update
-
-Update project management documentation if required.
-
-Review and update:
-
-- PROJECT_STATUS.md
-- CURRENT_PHASE.md
-- CHANGELOG.md
-- MILESTONES.md
-
----
-
-# Completion Criteria
-
-A feature, subsystem, or milestone is **not considered complete** until every step in this document has been successfully completed.
-
-This Definition of Done applies to all future development within TORANA Engine.
+| Milestone | Status |
+|-----------|--------|
+| Engine Core v1.0 | ✅ Complete |
+| Plugin Framework v1.0 | ✅ Complete |
+| Dataset Framework v1.0 | 🚧 In Progress |

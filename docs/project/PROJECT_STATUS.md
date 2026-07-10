@@ -1,125 +1,62 @@
-# Project Status
+# TORANA Project Status
 
-**Project:** TORANA Engine
-
-**Current Milestone:** Plugin Framework v1.0
-
-**Overall Status:** 🟡 Active Development
+**Last Updated:** July 2026
 
 ---
 
-# Current Phase
+# Completed
 
-**Plugin Framework v1.0**
+## Engine Core v1.0
 
-Current Workflow Stage:
-
-- 🟡 Architecture
-
-Current Deliverable:
-
-- `docs/plugin-framework/plugin_architecture.md`
-
----
-
-# Completed Milestones
-
-## ❄️ Engine Core v1.0
-
-Engine Core has been completed, validated, documented, tested, and frozen.
-
-### Architecture
-
-- Engine Architecture
-- Workflow Architecture
-- Execution Architecture
-- Runtime Architecture
-
-### Core Models
-
-- Plugin
-- Task
-- Workflow
-- Job
-
-### Runtime
-
-- ExecutionContext
-- ExecutionResources
-- ExecutionServices
-- ExecutionState
-
-### Execution
-
+- Domain Models
+- Runtime Models
 - Engine
-- PluginRegistry
+- Execution Manager
 - Scheduler
-- ExecutionManager
-- TaskExecutor
+- Task Executor
+- Workflow
+- Testing
+- Documentation
 
-### Testing
-
-- Unit Testing Infrastructure
-- Shared Test Fixtures
-- Dependency Injection Tests
-
-### Documentation
-
-- Architecture
-- Specifications
-- ADRs
-- Engineering Handbook
+Status: ✅ Frozen
 
 ---
-
-# In Progress
-
-## 🟡 Plugin Framework v1.0
-
-Current work includes:
-
-- Plugin Architecture
-- Plugin Contract
-- Plugin Lifecycle
-- Plugin Metadata
-- Plugin Registry
-- Plugin Development Guide
-- ADR-001
-
-Implementation has **not** yet begun.
-
----
-
-# Next Milestone
 
 ## Plugin Framework v1.0
 
-Upcoming implementation:
+- Plugin Manifest
+- Base Plugin
+- Plugin Registry
+- Exceptions
+- Types
+- Reference Flood Risk Plugin
+- Integration Tests
+- Documentation
 
-- Plugin SDK
-- Plugin Test Infrastructure
-- Flood Risk Reference Plugin
-
----
-
-# Repository Health
-
-| Component | Status |
-|-----------|--------|
-| Engine Core | ❄️ Frozen |
-| Plugin Framework | 🟡 In Progress |
-| Architecture | 🟢 Up to Date |
-| Documentation | 🟢 Up to Date |
-| Testing Infrastructure | 🟢 Stable |
-| Project Structure | 🟢 Stable |
-| Repository | 🟢 Healthy |
+Status: ✅ Frozen
 
 ---
 
-# Project Summary
+# Current
 
-TORANA Engine has successfully completed the Engine Core milestone.
+## Dataset Framework v1.0
 
-Current development is focused on building the Plugin Framework, which will establish the extensibility architecture for all future plugins.
+Status: 🚧 In Progress
 
-The Flood Risk Analysis Plugin will serve as the reference implementation for every future Analysis Plugin.
+Planned work:
+
+- Dataset Manifest
+- Dataset Registry
+- Dataset Provider
+- Dataset Discovery
+- Dataset Validation
+- Reference Provider
+
+---
+
+# Planned
+
+- Analysis Framework
+- Visualization Framework
+- Reporting Framework
+- Production Release
