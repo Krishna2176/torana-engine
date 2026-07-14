@@ -1,62 +1,71 @@
-# TORANA Project Status
+# TORANA Engine Project Status
 
-**Last Updated:** July 2026
+## Current Version
+
+Pre-Alpha
 
 ---
 
-# Completed
+# Completed Milestones
 
 ## Engine Core v1.0
 
-- Domain Models
-- Runtime Models
+Status: Frozen
+
+Completed Components
+
 - Engine
 - Execution Manager
 - Scheduler
 - Task Executor
 - Workflow
-- Testing
-- Documentation
-
-Status: ✅ Frozen
+- Runtime
+- Plugin Registry
+- Core Models
+- Tests
 
 ---
 
 ## Plugin Framework v1.0
 
+Status: Frozen
+
+Completed Components
+
 - Plugin Manifest
 - Base Plugin
 - Plugin Registry
-- Exceptions
-- Types
-- Reference Flood Risk Plugin
-- Integration Tests
-- Documentation
-
-Status: ✅ Frozen
+- Workflow Builder
+- Plugin SDK
+- Reference Plugin
+- Tests
 
 ---
-
-# Current
 
 ## Dataset Framework v1.0
 
-Status: 🚧 In Progress
+Status: In Progress
 
-Planned work:
+Completed
 
 - Dataset Manifest
+- Dataset Characteristics
+- Dataset Requirement
+- Dataset Types
+- Dataset Exceptions
+- Base Provider
 - Dataset Registry
-- Dataset Provider
+- Shared Test Fixtures
+- Test Suite
+
+Remaining
+
 - Dataset Discovery
 - Dataset Validation
-- Reference Provider
+- Local Reference Provider
 
 ---
 
-# Planned
+# Next Milestone
 
-- Analysis Framework
-- Visualization Framework
-- Reporting Framework
-- Production Release
+Analysis Framework v1.0

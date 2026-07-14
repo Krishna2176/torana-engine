@@ -1,93 +1,90 @@
-# TORANA Milestones
+# TORANA Engine Milestones
 
 ---
 
-## Engine Core v1.0
+# Engine Core v1.0
 
-Status: ✅ Completed
+Status
+
+Completed
 
 Deliverables
 
 - Engine
-- Execution Pipeline
-- Workflow
+- Runtime
+- Execution Manager
 - Scheduler
+- Workflow
 - Task Executor
-- Runtime Models
-- Unit Tests
-
-Frozen.
+- Plugin Registry
+- Tests
 
 ---
 
-## Plugin Framework v1.0
+# Plugin Framework v1.0
 
-Status: ✅ Completed
+Status
+
+Completed
 
 Deliverables
 
 - Plugin Manifest
 - Base Plugin
+- Workflow Builder
 - Plugin Registry
-- Plugin Exceptions
-- Plugin Types
+- Plugin SDK
 - Reference Plugin
-- Integration Tests
-
-Frozen.
+- Tests
 
 ---
 
-## Dataset Framework v1.0
+# Dataset Framework v1.0
 
-Status: 🚧 Current
+Status
 
-Planned Deliverables
+Implementation
+
+Deliverables
+
+Completed
 
 - Dataset Manifest
+- Dataset Characteristics
+- Dataset Requirement
+- Dataset Types
+- Dataset Exceptions
+- Base Provider
 - Dataset Registry
-- Dataset Provider Interface
+- Shared Test Infrastructure
+
+Remaining
+
 - Dataset Discovery
 - Dataset Validation
-- Dataset Provider SDK
-- Reference Dataset Provider
+- Local Reference Provider
+- Integration Tests
 
 ---
 
-## Analysis Framework v1.0
+# Analysis Framework v1.0
 
-Status: Planned
+Status
 
-Planned Deliverables
-
-- Analysis Pipeline
-- Algorithm Interfaces
-- Analysis Services
-- Shared Analysis Components
+Not Started
 
 ---
 
-## Visualization Framework v1.0
+# Visualization Framework v1.0
 
-Status: Planned
+Status
 
-Planned Deliverables
-
-- Visualization Plugins
-- Report Generation
-- Map Generation
-- Three.js Integration
-- Blender Integration
+Not Started
 
 ---
 
-## Engine v2.0
+# TORANA Engine v1.0
 
-Status: Future
+Status
 
-Potential enhancements
-
-- Parallel Execution
-- Distributed Execution
-- Resource Scheduling
-- Execution Monitoring
+Planned

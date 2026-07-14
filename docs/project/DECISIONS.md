@@ -1,41 +1,91 @@
-# Project Decisions
+---
+
+# ADR Summary — Dataset Framework
+
+## Decision
+
+Dataset metadata is divided into three independent domain models.
+
+### Dataset Characteristics
+
+Represents the intrinsic characteristics of a dataset.
+
+Contains
+
+- Category
+- Dataset Type
+- Domain
+- CRS
+- Resolution
+- Extent
+- Tags
+
+Dataset Characteristics are immutable.
 
 ---
 
-## Engine Core
+### Dataset Requirement
 
-Status: Frozen
+Represents the requirements declared by Analysis Plugins.
 
-The Engine Core is considered architecturally complete.
+A Dataset Requirement contains Dataset Characteristics.
 
-Future modifications are limited to:
-
-- Bug fixes
-- Documentation improvements
-- Additional tests
-- Non-breaking refactoring
+It represents what an analysis requires.
 
 ---
 
-## Plugin Framework
+### Dataset Manifest
 
-Status: Frozen
+Represents metadata describing an available dataset.
 
-The Plugin Framework is considered architecturally complete.
+A Dataset Manifest contains
 
-Future modifications are limited to:
+- Identity
+- Dataset Characteristics
+- Temporal Metadata
+- Provider Metadata
+- Licensing Metadata
 
-- Bug fixes
-- Documentation improvements
-- Additional tests
-- Non-breaking refactoring
+It represents what exists.
 
 ---
 
-## Active Development
+## Architectural Decision
 
-Current development focuses exclusively on:
+Dataset Requirement and Dataset Manifest do not inherit from each other.
 
-Dataset Framework v1.0
+Both compose Dataset Characteristics.
 
-No new functionality should be introduced into completed milestones.
+Reason
+
+The shared fields represent a common domain concept rather than an inheritance relationship.
+
+Composition preserves separation of responsibilities while eliminating duplicated metadata.
+
+---
+
+## Registry Responsibility
+
+Dataset Registry manages Dataset Providers.
+
+Providers own Dataset Manifests.
+
+The Registry never stores Dataset Manifests directly.
+
+---
+
+## Discovery Responsibility
+
+Dataset Discovery discovers compatible Dataset Manifests.
+
+It never acquires datasets.
+
+Acquisition is delegated to Dataset Providers.
+
+---
+
+## Validation Responsibility
+
+Dataset Validation compares Dataset Requirements against Dataset Manifests.
+
+Validation does not interact with Dataset Providers.
