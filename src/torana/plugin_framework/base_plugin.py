@@ -1,109 +1,43 @@
 """
-Abstract base class for all TORANA Plugins.
+Abstract base class for all TORANA plugins.
 """
 
 from __future__ import annotations
 
 from abc import ABC
-from abc import abstractmethod
-from typing import TYPE_CHECKING
 
 from .manifest import PluginManifest
-
-if TYPE_CHECKING:
-    from torana.models.job import Job
-    from torana.models.workflow import Workflow
 
 
 class BasePlugin(ABC):
     """
-    Base class for every TORANA Plugin.
+    Base class for every TORANA plugin.
 
-    The BasePlugin defines the architectural contract between
-    Analysis Plugins and the Plugin Framework.
+    A plugin is a discoverable extension that can be registered with the
+    Plugin Framework.
 
-    Plugins describe analyses.
-
-    The Engine executes analyses.
+    Domain-specific behavior belongs to specialized plugin types
+    (for example, BaseAnalysis).
     """
 
     def __init__(self, manifest: PluginManifest) -> None:
-        """
-        Initialize the Plugin with its immutable manifest.
-        """
-        self._manifest: PluginManifest = manifest
-
-    # ------------------------------------------------------------------
-    # Identity
-    # ------------------------------------------------------------------
+        self._manifest = manifest
 
     @property
     def manifest(self) -> PluginManifest:
         """
-        Return the Plugin Manifest.
-
-        The manifest is immutable and uniquely identifies the Plugin.
+        Immutable plugin metadata.
         """
         return self._manifest
 
-    # ------------------------------------------------------------------
-    # Configuration
-    # ------------------------------------------------------------------
-
-    @property
-    @abstractmethod
-    def configuration_schema(self) -> dict:
+    def initialize(self) -> None:
         """
-        Return the Plugin configuration schema.
+        Optional lifecycle hook executed when the plugin is loaded.
         """
-        raise NotImplementedError
+        return None
 
-    # ------------------------------------------------------------------
-    # Dataset Requirements
-    # ------------------------------------------------------------------
-
-    @property
-    @abstractmethod
-    def required_datasets(self) -> tuple[str, ...]:
+    def shutdown(self) -> None:
         """
-        Return the datasets required by this Plugin.
+        Optional lifecycle hook executed before the plugin is unloaded.
         """
-        raise NotImplementedError
-
-    # ------------------------------------------------------------------
-    # Outputs
-    # ------------------------------------------------------------------
-
-    @property
-    @abstractmethod
-    def outputs(self) -> tuple[str, ...]:
-        """
-        Return the outputs produced by this Plugin.
-        """
-        raise NotImplementedError
-
-    # ------------------------------------------------------------------
-    # Validation
-    # ------------------------------------------------------------------
-
-    @abstractmethod
-    def validate(self, job: Job) -> bool:
-        """
-        Validate the supplied Job before Workflow construction.
-        """
-        raise NotImplementedError
-
-    # ------------------------------------------------------------------
-    # Workflow Construction
-    # ------------------------------------------------------------------
-
-    @abstractmethod
-    def build_workflow(self, job: Job) -> Workflow:
-        """
-        Construct and return the Workflow for this Plugin.
-
-        The Plugin defines the Workflow.
-
-        The Engine executes it.
-        """
-        raise NotImplementedError
+        return None

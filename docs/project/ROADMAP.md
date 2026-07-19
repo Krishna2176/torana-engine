@@ -1,23 +1,41 @@
-## Dataset Framework v1.0
+# Roadmap
 
-Purpose
+## Phase 1
 
-Provide a modular framework for dataset discovery, validation, and acquisition.
+Core Architecture
 
-### Completed
+- ✅ Engine Core
+- ✅ Plugin Framework
+- ✅ Dataset Framework
+- ✅ Analysis Framework
 
-- Dataset Manifest
-- Dataset Characteristics
-- Dataset Requirement
-- Dataset Types
-- Exception Hierarchy
-- Base Provider
-- Dataset Registry
-- Shared Test Infrastructure
+---
 
-### Remaining
+## Phase 2
 
-- Dataset Discovery
-- Dataset Validation
-- Local Reference Provider
-- Framework Integration Tests
+Reference Implementations
+
+- Flood Analysis
+- Urban Heat Analysis
+- Solar Potential Analysis
+
+---
+
+## Phase 3
+
+Visualization
+
+- Visualization Framework
+- Three.js Export
+- Blender Export
+- Report Generation
+
+---
+
+## Phase 4
+
+Production
+
+- CLI
+- REST API
+- Web Interface

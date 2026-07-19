@@ -1,45 +1,29 @@
 # Current Phase
 
-**Project:** TORANA Engine
+## Active Milestone
+
+Analysis Framework v1.0
+
+**Status**
+
+✅ Completed
 
 ---
 
-## Current Milestone
-
-Dataset Framework v1.0
-
----
-
-## Status
-
-Implementation
-
----
-
-## Completed
+## Completed Frameworks
 
 - Engine Core v1.0
 - Plugin Framework v1.0
-- Dataset Framework Architecture
-- Dataset Manifest
-- Dataset Characteristics
-- Dataset Requirement
-- Dataset Types
-- Dataset Exceptions
-- Base Provider
-- Dataset Registry
-- Dataset Framework Test Suite
-
----
-
-## In Progress
-
-- Dataset Discovery
-- Dataset Validation
-- Local Reference Provider
+- Dataset Framework v1.0
+- Analysis Framework v1.0
 
 ---
 
 ## Next Milestone
 
-Analysis Framework v1.0
+Flood Analysis Plugin v1.0
+
+The Flood Analysis Plugin will become the reference implementation of the
+Analysis Framework. It will demonstrate how an analysis plugin declares
+its datasets, configuration, outputs, and planning logic while remaining
+independent of execution.

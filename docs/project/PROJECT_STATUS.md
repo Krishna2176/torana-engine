@@ -1,4 +1,4 @@
-# TORANA Engine Project Status
+# TORANA Engine Status
 
 ## Current Version
 
@@ -6,66 +6,66 @@ Pre-Alpha
 
 ---
 
-# Completed Milestones
+## Completed
 
-## Engine Core v1.0
+### Engine Core
 
-Status: Frozen
-
-Completed Components
+Status: Stable
 
 - Engine
 - Execution Manager
 - Scheduler
 - Task Executor
 - Workflow
-- Runtime
-- Plugin Registry
-- Core Models
-- Tests
+- Runtime Context
 
 ---
 
-## Plugin Framework v1.0
+### Plugin Framework
 
-Status: Frozen
-
-Completed Components
+Status: Stable
 
 - Plugin Manifest
 - Base Plugin
 - Plugin Registry
-- Workflow Builder
-- Plugin SDK
-- Reference Plugin
-- Tests
 
 ---
 
-## Dataset Framework v1.0
+### Dataset Framework
 
-Status: In Progress
-
-Completed
+Status: Stable
 
 - Dataset Manifest
-- Dataset Characteristics
-- Dataset Requirement
-- Dataset Types
-- Dataset Exceptions
-- Base Provider
-- Dataset Registry
-- Shared Test Fixtures
-- Test Suite
-
-Remaining
-
+- Dataset Requirements
 - Dataset Discovery
 - Dataset Validation
-- Local Reference Provider
+- Dataset Registry
 
 ---
 
-# Next Milestone
+### Analysis Framework
 
-Analysis Framework v1.0
+Status: Stable
+
+- Analysis Manifest
+- Parameter Schema
+- Configuration
+- Analysis Context
+- Base Analysis
+- Planner
+
+---
+
+## Testing
+
+Engine Tests
+
+Passed: 123 / 123
+
+Status: Passing
+
+---
+
+## Current Focus
+
+Flood Analysis Plugin

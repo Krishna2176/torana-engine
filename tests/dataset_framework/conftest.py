@@ -90,10 +90,12 @@ class DummyProvider(BaseProvider):
     def __init__(
         self,
         manifest: DatasetManifest,
+        *,
+        provider_id: str = "local",
     ) -> None:
 
         super().__init__(
-            id="local",
+            id=provider_id,
             name="Local Provider",
             version="1.0.0",
             description="Reference Dataset Provider.",
@@ -102,34 +104,29 @@ class DummyProvider(BaseProvider):
         self._manifest = manifest
 
     @property
-    def manifests(self):
-
+    def manifests(self) -> tuple[DatasetManifest, ...]:
         return (self._manifest,)
 
     def discover(
         self,
         requirement: DatasetRequirement,
-    ):
-
+    ) -> tuple[DatasetManifest, ...]:
         return self.manifests
 
     def is_available(
         self,
         dataset_id: str,
     ) -> bool:
-
         return dataset_id == self._manifest.id
 
     def acquire(
         self,
         dataset_id: str,
     ):
-
         return {
             "dataset_id": dataset_id,
         }
-
-
+        
 @pytest.fixture
 def provider(
     manifest: DatasetManifest,

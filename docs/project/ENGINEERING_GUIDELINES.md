@@ -1,36 +1,18 @@
 # TORANA Engineering Guidelines
 
-Version: 1.0
-
----
-
-# Purpose
-
-This document defines the engineering practices used throughout TORANA Engine.
-
-Every framework must follow these guidelines.
-
-These guidelines exist to ensure the project remains maintainable, scalable, and internally consistent.
+Version: 1.1
 
 ---
 
 # Engineering Philosophy
 
-TORANA prioritizes:
+TORANA is developed from the architecture downward.
 
-- Correctness
-- Simplicity
-- Modularity
-- Maintainability
-- Testability
-
-Engineering decisions are made for long-term sustainability rather than short-term convenience.
+Every implementation must have a clearly defined architectural purpose.
 
 ---
 
-# Engineering Workflow
-
-Every feature follows the same workflow.
+# Development Workflow
 
 Architecture
 
@@ -40,7 +22,7 @@ Documentation
 
 ↓
 
-API Design
+Public API
 
 ↓
 
@@ -58,37 +40,82 @@ Refinement
 
 Freeze
 
-No implementation begins before the architecture is documented.
-
 ---
 
 # Framework Lifecycle
 
-Each framework progresses through the following stages.
-
 Planning
+
+↓
 
 Architecture
 
+↓
+
 Implementation
+
+↓
 
 Testing
 
+↓
+
 Documentation
+
+↓
 
 Freeze
 
-Once frozen, a framework is considered stable.
+Frozen frameworks are considered stable.
 
-Breaking architectural changes are avoided.
+Future work extends them rather than redesigning them.
 
 ---
 
-# Definition of Stability
+# Demand-Driven Implementations
 
-A framework is stable when:
+Frameworks define contracts.
 
-- Public API is frozen.
-- Documentation matches implementation.
-- Tests pass.
-- No architectural inconsistencies remain.
+Implementations satisfy contracts.
+
+Analysis Plugins define Dataset Requirements.
+
+Dataset Providers evolve to satisfy those requirements.
+
+Avoid speculative implementations.
+
+---
+
+# Architecture First
+
+Do not introduce abstractions until they naturally emerge.
+
+Extract common concepts only after they demonstrate reuse.
+
+Prefer composition over inheritance.
+
+---
+
+# Public APIs
+
+Public APIs are explicit.
+
+Public APIs are strongly typed.
+
+Public APIs remain stable after framework freeze.
+
+---
+
+# Testing
+
+Every public component requires automated tests.
+
+Tests are considered part of implementation.
+
+---
+
+# Documentation
+
+Documentation must always match implementation.
+
+Every framework freeze requires documentation review.

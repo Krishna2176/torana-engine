@@ -4,9 +4,10 @@ TORANA Dataset Framework.
 
 from .base_provider import BaseProvider
 from .characteristics import DatasetCharacteristics
-from .exceptions import *
+from .discovery import DatasetDiscovery
 from .manifest import DatasetManifest
 from .registry import DatasetRegistry
+from .validation import DatasetValidation
 from .requirement import DatasetRequirement
 from .types import (
     DatasetCategory,
@@ -15,9 +16,12 @@ from .types import (
     UpdateFrequency,
 )
 
+from .exceptions import *
+
 __all__ = [
     "BaseProvider",
     "DatasetCharacteristics",
+    "DatasetDiscovery",
     "DatasetManifest",
     "DatasetRequirement",
     "DatasetRegistry",
@@ -25,4 +29,5 @@ __all__ = [
     "DatasetDomain",
     "DatasetType",
     "UpdateFrequency",
+    "DatasetValidation"
 ]
